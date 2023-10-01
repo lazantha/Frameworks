@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>PDF</title>
+{% endblock %}
+
+{% block content %}
+	
+	<div>
+		<h2>First Name: {{fname}}</h2>
+		<h2>Last Name: {{lname}}</h2>
+		
+	</div>
+
+	<a href="pdf?action=print">print</a>
+
+
+{% endblock %}
+

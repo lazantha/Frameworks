@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block head %}
+	<title>Date </title>
+{% endblock %}
+
+{% block content %}
+	
+	<form action="/dateTime" method="get" >
+		<input type="date" name="new_date" id="date"><br>
+		<input type="submit" value="Set">
+	</form>
+	
+
+
+<script>
+  // Get the current date in the format YYYY-MM-DD
+  var currentDate = new Date().toISOString().slice(0, 10);
+
+  // Set the min attribute to the current date
+  document.getElementById("date").min = currentDate;
+</script>
+{% endblock %}

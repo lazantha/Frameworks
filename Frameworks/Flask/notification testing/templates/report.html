@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head %}
+	<title>Report</title>
+	<style>
+		table{border-collapse: collapse;}
+		table tr,td{padding: 10px;border: 1px solid black;}
+		#topic{font-size: 2em;color: red;}
+
+		form{padding-left: 1rem ;padding-top: 3rem}
+	</style>
+{% endblock %}
+
+{% block content %}
+
+	<form action="/pdf" method="get">
+			
+			<input type="text" placeholder="first name" name="fname"><br>
+			<input type="text" placeholder="last name" name="lname"><br>
+			<input type="email" placeholder="email"><br>
+			<input type="submit" value="update">
+
+
+	</form>
+
+{% endblock %}

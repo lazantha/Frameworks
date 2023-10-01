@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Home</title>
+<style>
+	body{
+		background-image: url({{url_for('static',filename='images/.jpg')}})
+	}
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+
+{{form.hidden_tag()}}
+
+<div class="form-floating mb-3">
+  <!-- <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"> -->
+  {{form.email(class="form-control" ,id="floatingInput" ,placeholder="name@example.com" )}}
+  <label for="floatingInput">{{form.email.label}}</label>
+</div>
+<div class="form-floating">
+  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+  <label for="floatingPassword">Password</label>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>User Home</title>
+{% endblock %}
+
+
+{% block content %}
+    <div id="remain_days">{{remaining_days}}</div>
+    <button id="btnForm">Form</button>
+
+    <script>
+        var remain_day = document.getElementById('remain_days');
+        var remain_value = parseInt(remain_day.textContent); // Convert to an integer
+        var current_date = new Date(); // Get the current date and time
+        var target_date = new Date(current_date.getTime() + remain_value * 24 * 60 * 60 * 1000); // Add remaining days in milliseconds
+
+        // Function to check and disable the button if the target date is reached
+        function checkTargetDate() {
+            if (current_date >= target_date) {
+                var btnForm = document.getElementById('btnForm');
+                btnForm.disabled = true;
+            }
+        }
+
+        // Call the checkTargetDate function when the page loads
+        window.onload = function() {
+            checkTargetDate();
+        };
+    </script>
+{% endblock %}

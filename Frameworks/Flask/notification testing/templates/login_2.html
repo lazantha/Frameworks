@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block head %}
+	<title>WT forms</title>
+{% endblock %}
+
+{% block content %}
+	
+	 <table class="table table-hover table table-bordered table-striped mb-0">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Name</th>
+                  <th>Red Book/ID</th>
+                  <th>Medical</th>
+                  <th>Confirmation</th>
+                  <th>Rejection</th>
+                  
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in result %}
+              		<tr>
+              			<td>{{row[0]}}</td>
+              			<td>{{row[1]}}</td>
+              			<td>{{row[2]}}</td>
+              			<td>{{row[3]}}</td>
+
+              			<td>
+              				<a href="/?action=it_accept&row_id={{row[0]}}" role="button" class="btn btn-success btn-sm">Confirm</a>
+              				
+              			</td>
+              			<td>
+              				<form action="/" method="get">
+              					<input type="hidden" name="row_id" value="{{row[0]}}">
+              					 <input type="hidden" name="action" value="it_reject">
+              					<textarea placeholder="Optional" name="message"></textarea>
+              					<input type="submit" value="Reject" class="btn btn-danger btn-sm">
+              				</form>
+              			</td>
+              		</tr>
+                {% endfor %}
+              </tbody>
+          
+            </table>
+
+<div>
+  <a href="/pdf?action=print">Print</a>
+</div>
+
+{% endblock %}

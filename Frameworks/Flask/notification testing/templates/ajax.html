@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+	<div>
+		<input type="text" placeholder="Name" id="name">
+		<select name="" id="dep">
+			<option value="it" id="it">IT</option>
+			<option value="eng" id="eng">ENG</option>
+		</select>
+		<button>Update</button>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+    $(document).ready(function(){
+        $('button').click(function(){
+            var name = $('#name').val();
+            var selct = $('#dep').val(); // Corrected the variable name and selector
+            
+            // Corrected the syntax for $.get
+            $.get('/ajax', { name: name, dep: selct }, function(data) {
+                console.log(data);
+            });
+        });
+    });
+</script>
+
+</body>
+
+</body>
+</html>
