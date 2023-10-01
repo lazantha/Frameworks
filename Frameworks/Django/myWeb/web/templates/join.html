@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block head %}
+	<title>Join</title>
+
+{% endblock %}
+
+
+<div class="container">
+{% block content %}
+<h1>Join Us</h1>
+	
+	<form method="post" action="{% url 'join_page' %}">
+		{% csrf_token %}
+  <div class="mb-3">
+    <input type="text" placeholder="First Name" class="form-control" id="exampleInputEmail1" name="first_name">
+
+  </div>
+
+    <div class="mb-3">
+    <input type="text" placeholder="Last Name" class="form-control" id="exampleInputEmail1" name="last_name">
+
+  </div>
+
+    <div class="mb-3">
+    <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+
+  </div>
+
+  <div class="mb-3">
+    <input type="password" placeholder="password" class="form-control" id="exampleInputPassword1" name="password">
+  </div>
+
+  <div class="mb-3 form-check">
+  	<button type="submit" class="btn btn-primary">Submit</button>  
+  </div>
+  
+</form>
+
+
+
+{% endblock %}
+
+</div>

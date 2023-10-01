@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Read</title>
+{% endblock %}
+
+{% block content %}
+	
+	<table>
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Age</th>
+				
+				
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+
+					<tr>
+						<td>{{row.first_name}}</td>
+						<td>{{row.last_name}}</td>
+						<td>{{row.email}}</td>
+						<td>{{row.age}}</td>
+						
+						
+					</tr>
+
+			{% endfor %}
+		</tbody>
+
+	</table>
+
+	<hr>
+	<table>
+		<thead>
+			<tr>First Name</tr>
+			<tr>Last Name</tr>
+			
+		</thead>
+		<tbody>
+			{% for row in data_2 %}
+				<tr>
+					<td>{{row.first_name}}</td>
+					<td>{{row.last_name}}</td>
+					
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>					
+	
+
+	<hr>
+	<table>
+		<thead>
+			<tr><th>Book name</th> <th>Auther</th></tr>
+		</thead>
+
+		<tbody>
+			{% for row in book_data %}
+			<tr>
+				<td>{{row.title}}</td>
+				<td>{{row.author}}</td>
+				
+			</tr>
+			{% endfor %}
+		</tbody>
+
+
+	</table>
+{% endblock %}
+

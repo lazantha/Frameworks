@@ -1,0 +1,256 @@
+pip install django
+.......................
+django-admin (appearing admin panel of django)
+.......................
+django-admin startproject (name of the project)
+.......................
+python manage.py runserver(to run the server)
+.......................
+python manag.py startapp(to create another folder insinde the django app)
+.......................
+
+to enable migrations in database and so on..
+first time.
+	1.python manage.py createsuperuser-->no such table:auth
+	2.python manage.py makemigration-->no changes detected
+	3.python manage.py migrate
+	4.rerun command (1)
+
+
+
+creating table on models.py in (web) folder
+
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+
+
+class Post(models.Model):
+	title=models.CharField(max_length=100)
+	content=models.TextField()
+	date_posted=models.DateTimeField(default=timezone.now)
+	author=models.ForeignKey(User,on_delete=models.CASCADE)
+
+
+on cmd -->
+	python manage.py makemigrations
+	python manage.py migrate
+
+
+
+
+basic file and folder handling in django
+
+start new project using 
+	django-admin startproject <rootWeb>
+navigate to that folder 
+	cd <name>
+start new app using
+	python manage.py startapp <app>
+
+Now 
+	Main directories
+		rootWeb (root directory)
+		app(working directory)
+create <app>
+	static folder
+	template folder
+	urls.py
+	forms.py
+edit setting file in Root folder
+	copy class name of <app> directory into the setting file of root folder for identify
+	app.apps.<classname>
+edit urls file in root folder 
+	copy url path to url fille of <app> drectory
+set url file of root directory
+with include
+create relationship with <app> directory
+from app import urls as web_urls
+
+setup views.py file
+	create all python function 
+
+set urls.py file in <app> directory
+	include all the methods in  views.py file
+	create own path using views
+
+
+
+
+django forms
+
+
+open up forms.py file
+
+from django.forms import ModelForms
+from. model import *
+create class as forms
+	
+	Class StudentForm(ModelForms):
+		class Meta:
+			model=StudentTable()
+			fields='__all__'
+
+
+
+
+evaluate form it view to render the form
+
+in views.py file
+	
+def home(request)
+	form=StudentForm()
+	if request.method=='POST':
+		form=StudentForm(request.POST)
+		if form.is_valid():	
+			form.save()
+			return redirect('home_page')
+	context={'form':form}
+	return render(request,'home.html',context)
+
+
+
+def adminLogin(request):
+	
+	form=AdminForm()
+	if request.method=='POST':
+		form=AdminForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('name of the url which provide when create urls.py file')
+	context={'form':form}
+			
+	
+	return render(request,'admin_login.html',context)
+
+
+def userLog(request):
+	
+	form=UserRegForm()
+	if request.method=='POST':
+		form=UserRegForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('home_page')
+	
+	context={'form':form}
+	return render(request,'user_log.html',context)
+		
+
+def adminReg(request):
+	form=AdminRegForm()
+	if request.method=='POST':
+		form=AdminRegForm(request.object)
+		if form.is_valid():
+			form.save()
+			return redirect('home_page')
+	context={'form':form}
+	return render(request,'admin_reg.html',context)
+
+
+
+
+
+Filtering Methods from model 
+
+Filtering
+# Get all students with a last name of 'Smith'
+students = StudentTable.objects.filter(last_name='Smith')
+
+# Get students who are not teenagers (age >= 18)
+adults = StudentTable.objects.exclude(age__lt=18)
+
+Get
+# Get a single student with a specific ID
+student = StudentTable.objects.get(id=1)
+
+Count and exist
+
+# Count the number of students with a last name of 'Smith'
+count = StudentTable.objects.filter(last_name='Smith').count()
+
+# Check if there are any students with the last name 'Doe'
+exists = StudentTable.objects.filter(last_name='Doe').exists()
+
+
+Ordering
+
+# Get all students ordered by their age in ascending order
+students = StudentTable.objects.all().order_by('age')
+
+# Get the youngest student
+youngest_student = StudentTable.objects.all().order_by('-age').first()
+
+slicing
+
+# Get the first 5 students
+students = StudentTable.objects.all()[:5]
+
+# Get the next 5 students (useful for pagination)
+next_students = StudentTable.objects.all()[5:10]
+
+Aggregate
+
+from django.db.models import Avg, Sum
+
+# Calculate the average age of all students
+avg_age = StudentTable.objects.aggregate(Avg('age'))
+
+# Calculate the total score of all students
+total_score = StudentTable.objects.aggregate(Sum('score'))
+
+Distinct
+
+# Get a list of distinct last names among all students
+distinct_last_names = StudentTable.objects.values('last_name').distinct()
+
+Values and value list
+
+# Get a list of dictionaries containing 'first_name' and 'last_name' for all students
+student_data = StudentTable.objects.values('first_name', 'last_name')
+
+# Get a list of tuples containing 'first_name' and 'last_name' for all students
+student_data_tuples = StudentTable.objects.values_list('first_name', 'last_name')
+
+
+Order to perform multiple methods in single line
+
+students = StudentTable.objects.filter(last_name='Smith', age__gte=18).annotate(avg_score=Avg('score')).order_by('age')[:5].values('first_name', 'last_name', 'avg_score')
+
+class.objects.filter(last_name='Smith', age__gte=18)
+
+age__gte=18(greater than or equal)
+age__gt=18(greater than)
+
+age__lte=18(less than or equal)
+age__lt=18(less than)
+
+
+age__exact=18 (exactly 18)
+
+age__in=[18,19]
+
+
+Django primary key Not neccesory but can create
+
+class MyModel(models.Model):
+    custom_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+
+
+
+
+small relationship
+
+class Author(models.Model):
+    author_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+
+

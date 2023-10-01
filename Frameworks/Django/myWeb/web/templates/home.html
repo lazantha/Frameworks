@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block head %}
+	<title>Home</title>
+
+{% endblock %}
+
+{% block content %}
+<h1>Home</h1>
+<hr>
+<h2>All members..</h2>
+
+{% for members in all %}
+	<p>{{members}}</p>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Home</title>
+{% endblock %}
+
+{% block content %}
+
+	<div class="form-group">
+
+		<form action="{% url 'homePage' %}" method="post">
+		{% csrf_token %}
+		{{form.first_name}} <br>
+		{{form.last_name}} <br>
+		
+		{{form.email}} <br>
+		{{form.age}} <br>
+		
+		
+		
+		
+		<input type="submit">
+
+	</form>
+	
+</div>
+
+	
+	<hr>
+
+{% endblock %}
+

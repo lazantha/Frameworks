@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Home</title>
+
+
+{% endblock %}
+{% block content %}
+	<table>
+		<thead>
+			<tr>
+			<td>First Name</td>
+			<td>Last Name</td>
+			<td>Email</td>
+			<td>Delete</td>
+			</tr>
+		</thead>
+		<tbody>
+{% for row in student_data %}			
+		<tr>
+			<td>{{row.first_name}}</td>
+			<td>{{row.last_name}}</td>
+			<td>{{row.email}}</td>
+			<td><a href="">Delete</a></td>
+		</tr>
+{% endfor %}
+
+		</tbody>
+	</table>
+
+{% endblock %}
+
+

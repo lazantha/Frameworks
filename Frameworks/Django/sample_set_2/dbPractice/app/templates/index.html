@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home</title>
+</head>
+<body>
+	<h2>Database Query paractice</h2>
+	<h3>Single inner join using objects.select_related()</h3>
+	<table>
+		<thead>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>Index Number</th>
+			<th>Email name</th>
+			<th>Department</th>
+			
+		</thead>
+		<tbody>
+			{% for row in data %}
+			<tr>
+				<td>{{row.first_name}}</td>
+				<td>{{row.last_name}}</td>
+				<td>{{row.index_number}}</td>
+				<td>{{row.email}}</td>
+				<td>{{row.dep_id__calling_name}}</td>		
+				
+			</tr>
+			{% endfor %}
+	</table>
+
+<hr>
+
+	<h3>Double inner join using objects.select_related()</h3>
+	<table>
+		<thead>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>Index Number</th>
+			<th>Email name</th>
+			<th>Department</th>
+			<th>Gender</th>
+			
+		</thead>
+		<tbody>
+			{% for row in data_2 %}
+			<tr>
+				<td>{{row.first_name}}</td>
+				<td>{{row.last_name}}</td>
+				<td>{{row.index_number}}</td>
+				<td>{{row.email}}</td>
+				<td>{{row.dep_id__calling_name}}</td>		
+				<td>{{row.std_type_id__type_cat}}</td>		
+				
+			</tr>
+			{% endfor %}
+	</table>
+<hr>
+
+	<h3>Joining multiple tables using objects.select_related()</h3>
+	<table>
+		<thead>
+			<th>Exam date</th>
+			<th>Start time</th>
+			<th>End time</th>
+			<th>Location</th>
+			<th>Subject</th>
+			<th>Department</th>
+			
+		</thead>
+		<tbody>
+			{% for row in data_3 %}
+			<tr>
+				<td>{{row.exam_date}}</td>
+				<td>{{row.start_time}}</td>
+				<td>{{row.end_time}}</td>
+				<td>{{row.exam_location}}</td>
+				<td>{{row.subject_id__subject_name}}</td>		
+				<td>{{row.subject_id__dep_id__department}}</td>		
+				
+			</tr>
+			{% endfor %}
+	</table>
+
+</body>
+</html>
